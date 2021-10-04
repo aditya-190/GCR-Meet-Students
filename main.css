@@ -7,14 +7,14 @@
 }
 
 .logo {
-    position: absolute;
+    position: relative;
     width: 86px;
     float: left;
     height: 71px;
 }
 
 .heading {
-    position: absolute;
+    position: relative;
     height: fit-content;
     font-style: oblique;
     margin-left: 20%;
@@ -26,7 +26,7 @@
 }
 
 .innerContainer {
-    position: absolute;
+    position: relative;
     border-radius: 16px;
     height: 315px;
     width: 418px;
