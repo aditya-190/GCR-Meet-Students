@@ -1,0 +1,35 @@
+.container {
+    width: 450px;
+    height: 450px;
+    padding: 16px;
+    border-radius: 16px;
+    background: rgb(75, 69, 69);
+}
+
+.logo {
+    position: absolute;
+    width: 86px;
+    float: left;
+    height: 71px;
+}
+
+.heading {
+    position: absolute;
+    height: fit-content;
+    font-style: oblique;
+    margin-left: 20%;
+    font-weight: bold;
+    font-size: 32px;
+    font-family: "Courier New", sans-serif;
+    color: rgb(233, 66, 53);
+    width: 100%;
+}
+
+.innerContainer {
+    position: absolute;
+    border-radius: 16px;
+    height: 315px;
+    width: 418px;
+    padding: 16px;
+    background-color: rgb(136, 29, 29);
+}
