@@ -234,7 +234,7 @@ body {
 }
 
 .selectedContainer.expanded {
-    border: 0.06em solid #3694d7;
+    border: 1px solid #275efe;
     background: #fff;
     border-radius: 0.25em;
     padding: 0;
@@ -247,7 +247,7 @@ body {
 }
 
 .selectedContainer.expanded label:hover {
-    color: #3694d7;
+    font-weight: bold;
 }
 
 .selectedContainer.expanded input:checked + label {
