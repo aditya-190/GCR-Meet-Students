@@ -69,6 +69,11 @@ body {
     font-size: 14px;
 }
 
+.button:hover {
+    background-color: #678efe;
+    color: #fff;
+}
+
 /* Text Fields - Starts */
 .formInput {
     display: block;
@@ -92,7 +97,7 @@ body {
 
 .formInput:focus {
     outline: none;
-    border-color: #275efe;
+    border-color: #678efe;
 }
 
 .formContainer {
@@ -233,7 +238,7 @@ body {
     background: #fff;
     border-radius: 0.25em;
     padding: 0;
-    box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 5px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 3px 3px 5px 0;
     max-height: 15em;
 }
 
