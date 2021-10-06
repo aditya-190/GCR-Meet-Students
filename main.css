@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0 0;
 }
 
@@ -6,7 +6,7 @@ body{
     width: 450px;
     height: 450px;
     padding: 16px;
-    border: 5px solid black ;
+    border: 5px solid black;
 }
 
 .logo {
@@ -38,7 +38,7 @@ body{
 }
 
 /* Text Fields - Starts */
-.form-field {
+.formInput {
     display: block;
     width: 100%;
     padding: 8px 16px;
@@ -53,36 +53,45 @@ body{
     background: #fff;
     transition: border 0.3s ease;
 }
-.form-field::placeholder {
+
+.formInput::placeholder {
     color: #cbd1dc;
 }
-.form-field:focus {
+
+.formInput:focus {
     outline: none;
     border-color: #275efe;
 }
-.form-group {
+
+.formContainer {
     position: relative;
     margin-bottom: 16px;
     display: flex;
     width: 100%;
 }
-.form-group > span, .form-group .form-field {
+
+.formContainer > span, .formContainer .formInput {
     white-space: nowrap;
     display: block;
 }
-.form-group > span:not(:first-child):not(:last-child), .form-group .form-field:not(:first-child):not(:last-child) {
+
+.formContainer > span:not(:first-child):not(:last-child), .formContainer .formInput:not(:first-child):not(:last-child) {
     border-radius: 0;
 }
-.form-group > span:first-child, .form-group .form-field:first-child {
+
+.formContainer > span:first-child, .formContainer .formInput:first-child {
     border-radius: 6px 0 0 6px;
 }
-.form-group > span:last-child, .form-group .form-field:last-child {
+
+.formContainer > span:last-child, .formContainer .formInput:last-child {
     border-radius: 0 6px 6px 0;
 }
-.form-group > span:not(:first-child), .form-group .form-field:not(:first-child) {
+
+.formContainer > span:not(:first-child), .formContainer .formInput:not(:first-child) {
     margin-left: -1px;
 }
-.form-group .form-field {
+
+.formContainer .formInput {
     position: relative;
     z-index: 1;
     flex: 1 1 auto;
@@ -90,7 +99,8 @@ body{
     margin-top: 0;
     margin-bottom: 0;
 }
-.form-group > span {
+
+.formContainer > span {
     text-align: center;
     padding: 8px 12px;
     font-size: 14px;
@@ -100,7 +110,8 @@ body{
     border: 1px solid #cdd9ed;
     transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
 }
-.form-group:focus-within > span {
+
+.formContainer:focus-within > span {
     color: #fff;
     background: #678efe;
     border-color: #275efe;
