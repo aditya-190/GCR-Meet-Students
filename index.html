@@ -30,6 +30,11 @@
             <input class="formInput" placeholder="classroom.google.com" type="url">
         </div>
 
+        <input type="image" src="images/icon_minus.png" name="minusButton" class="minusButton" id="minusButton"
+               alt="Remove Selected Class"/>
+        <input type="image" src="images/icon_plus.png" name="plusButton" class="plusButton" id="plusButton"
+               alt="Add Class"/>
+
         <span class="selectedContainer">
             <input type="radio" name="teacherName" value="None" checked="checked" id="none"><label
                 for="none">None</label>
@@ -37,6 +42,10 @@
                 for="item_1">Item 1</label>
         </span>
 
+        <button class="button" id="meet">Google Meet</button>
+        <button class="button" id="classroom">Google ClassRoom</button>
+
+        <div id="snackbar">Text Wil be Shown Here...</div>
     </div>
 </div>
 <script src="main.js"></script>

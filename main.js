@@ -11,3 +11,17 @@ $(document).click(function() {
 });
 
 // Code Handling DropBox Select Options - Ends.
+
+$('.minusButton').click(function(e) {
+    const snackbar = document.getElementById("snackbar");
+    snackbar.className = "show";
+    snackbar.innerText = "Removed Successfully."
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+});
+
+$('.plusButton').click(function(e) {
+    const snackbar = document.getElementById("snackbar");
+    snackbar.className = "show";
+    snackbar.innerText = "Added Successfully."
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+});

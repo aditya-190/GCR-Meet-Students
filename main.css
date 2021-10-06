@@ -16,6 +16,24 @@ body {
     height: 71px;
 }
 
+.minusButton {
+    display: block;
+    float: right;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 40px;
+    height: 40px;
+}
+
+.plusButton {
+    display: block;
+    float: right;
+    margin-left: 2px;
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+}
+
 .heading {
     position: relative;
     height: fit-content;
@@ -35,6 +53,20 @@ body {
     width: 418px;
     padding: 16px;
     background-color: #99a3ba;
+}
+
+.button {
+    background-color: #eef4ff;
+    border: 0;
+    min-width: 9em;
+    margin-top: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 12px;
+    color: #99a3ba;
+    font-family: "Myriad Pro", "Arial", sans, sans-serif;
+    text-align: center;
+    font-size: 14px;
 }
 
 /* Text Fields - Starts */
@@ -123,7 +155,7 @@ body {
 /* DropDown Select - Starts */
 
 .selectedContainer {
-    min-width: 12em;
+    min-width: 18em;
     position: relative;
     display: inline-block;
     margin-right: 1em;
@@ -135,10 +167,10 @@ body {
     white-space: nowrap;
     color: #99a3ba;
     font-family: "Myriad Pro", "Arial", sans, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     outline: none;
     border: 0.06em solid transparent;
-    border-radius: 1em;
+    border-radius: 6px;
     background-color: #eef4ff;
     transition: 0.3s all ease-in-out;
 }
@@ -176,6 +208,7 @@ body {
     display: block;
     border-top: none;
     position: absolute;
+    font-weight: bolder;
     top: 0;
     width: 100%;
 }
@@ -222,3 +255,72 @@ body {
 }
 
 /* DropDown Select - Ends */
+
+/* Snackbar Animations - Starts */
+#snackbar {
+    visibility: hidden;
+    width: fit-content;
+    height: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 12px;
+    position: relative;
+    bottom: 5px;
+    z-index: 1;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 5px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 5px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 5px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 5px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+/* Snackbar Animations - Ends */
