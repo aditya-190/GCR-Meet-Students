@@ -16,6 +16,9 @@
   "icons": {
     "192": "images/logo.png"
   },
+  "permissions": [
+    "activeTab"
+  ],
   "browser_action": {
     "default_icon": "images/logo.png",
     "default_popup": "index.html"
