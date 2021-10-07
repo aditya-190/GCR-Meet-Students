@@ -17,13 +17,17 @@ function ValidURL(str) {
     return regex.test(str);
 }
 
-$('.minusButton').click(function () {
+function showToast(message) {
     const snackbar = document.getElementById("snackbar");
     snackbar.className = "show";
-    snackbar.innerText = "Removed Successfully."
+    snackbar.innerText = message;
     setTimeout(function () {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
+}
+
+$('.minusButton').click(function () {
+    showToast("Removed Successfully.");
 });
 
 $('.plusButton').click(function () {
@@ -36,7 +40,7 @@ $('.plusButton').click(function () {
         setTimeout(() => {
             document.querySelector("#meetContainer").style.border = "";
         }, 2000);
-
+        showToast("Enter Valid Meet Link.");
         return;
     }
 
@@ -45,7 +49,7 @@ $('.plusButton').click(function () {
         setTimeout(() => {
             document.querySelector("#classNameContainer").style.border = "";
         }, 2000);
-
+        showToast("Enter Class Name.");
         return;
     }
 
@@ -54,7 +58,7 @@ $('.plusButton').click(function () {
         setTimeout(() => {
             document.querySelector("#classRoomContainer").style.border = "";
         }, 2000);
-
+        showToast("Enter Valid ClassRoom Link.");
         return;
     }
 
@@ -67,13 +71,6 @@ $('.plusButton').click(function () {
     document.getElementById("className").value = "";
     document.getElementById("meetLink").value = "";
     document.getElementById("classroomLink").value = "";
-
-    const snackbar = document.getElementById("snackbar");
-    snackbar.className = "show";
-    snackbar.innerText = "Added Successfully."
-    setTimeout(function () {
-        snackbar.className = snackbar.className.replace("show", "");
-    }, 3000);
 });
 
 $(document.getElementById("googleMeet")).click(function () {
