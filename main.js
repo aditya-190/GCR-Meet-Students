@@ -159,7 +159,7 @@ $('.plusButton').click(function () {
 // Google Meet Button.
 $(document.getElementById("googleMeet")).click(function () {
     if (isURLValid(currentSelectedClass.meetLink)) {
-        chrome.tabs.create({active: true, url: currentSelectedClass.meetLink});
+        chrome.tabs.create({active: true, url: currentSelectedClass.meetLink}).then();
     } else {
         showToast("Please Select Class.");
     }
@@ -168,7 +168,7 @@ $(document.getElementById("googleMeet")).click(function () {
 // Google ClassRoom Button.
 $(document.getElementById("googleClassroom")).click(function () {
     if (isURLValid(currentSelectedClass.classroomLink)) {
-        chrome.tabs.create({active: true, url: currentSelectedClass.classroomLink});
+        chrome.tabs.create({active: true, url: currentSelectedClass.classroomLink}).then();
     } else {
         showToast("Please Select Class.");
     }
