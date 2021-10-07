@@ -84,7 +84,7 @@ $('.plusButton').click(function () {
 
 // Google Meet Button.
 $(document.getElementById("googleMeet")).click(function () {
-    if (currentSelectedClass.className !== "None") {
+    if (ValidURL(currentSelectedClass.meetLink)) {
         chrome.tabs.create({active: true, url: currentSelectedClass.meetLink});
     } else {
         showToast("Please Select Class.");
@@ -93,7 +93,7 @@ $(document.getElementById("googleMeet")).click(function () {
 
 // Google ClassRoom Button.
 $(document.getElementById("googleClassroom")).click(function () {
-    if (currentSelectedClass.className !== "None") {
+    if (ValidURL(currentSelectedClass.classroomLink)) {
         chrome.tabs.create({active: true, url: currentSelectedClass.classroomLink});
     } else {
         showToast("Please Select Class.");
