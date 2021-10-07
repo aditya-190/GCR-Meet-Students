@@ -168,7 +168,7 @@ body {
     margin-right: 1em;
     min-height: 2em;
     max-height: 2em;
-    overflow: hidden;
+    overflow: scroll;
     cursor: pointer;
     text-align: left;
     white-space: nowrap;

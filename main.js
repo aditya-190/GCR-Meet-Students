@@ -1,3 +1,9 @@
+const currentSelectedClass = {
+    "className": "None",
+    "meetLink": "",
+    "classroomLink": "",
+};
+
 // Code Handling DropBox Select Options - Starts.
 
 $('.selectedContainer').click(function (e) {
@@ -74,7 +80,17 @@ $('.plusButton').click(function () {
 });
 
 $(document.getElementById("googleMeet")).click(function () {
+    if (currentSelectedClass.className !== "None") {
+        chrome.tabs.create({active: true, url: currentSelectedClass.meetLink});
+    } else {
+        showToast("Please Select Class.");
+    }
 });
 
 $(document.getElementById("googleClassroom")).click(function () {
+    if (currentSelectedClass.className !== "None") {
+        chrome.tabs.create({active: true, url: currentSelectedClass.classroomLink});
+    } else {
+        showToast("Please Select Class.");
+    }
 });
