@@ -79,12 +79,14 @@ function updateList() {
     let html = '';
     let singleData;
     html += `<input type="radio" class="teacherName" name="teacherName" value="None"
-           id="teacherName" checked><label for="teacherName">None</label>`
+           id="None" checked><label for="teacherName">None</label>`
 
+    let indexCounter = 0;
     obj.forEach(function (element) {
-        singleData = `<input type="radio" class="teacherName" name="teacherName" value="${element.className}" id="${element.className}"><label
-                for="${element.className}">${element.className}</label>`
+        singleData = `<input type="radio" class="teacherName" name="teacherName" value="${element.className}" id="google_meets_students_${indexCounter}"><label
+                for="google_meets_students_${indexCounter}">${element.className}</label>`
         html += singleData;
+        indexCounter += 1;
     })
     classes.innerHTML = html;
 }
@@ -178,23 +180,16 @@ $('.selectedContainer').click(function (e) {
     const selection = $('#' + $(e.target).attr('for'))
     selection.prop('checked', true);
 
-    currentSelectedClass.className = selection.val();
-
-    console.log(currentSelectedClass.className);
-
-    if (currentSelectedClass.className !== "None") {
-        let index = currentSelectedClass.className.key;
-        let data = localStorage.getItem("data");
-        if (data != null) {
-            data = JSON.parse(data);
-        } else {
-            data = [];
-        }
-
-        console.log(index);
-        currentSelectedClass.meetLink = data[index].meetLink;
-        currentSelectedClass.classroomLink = data[index].classroomLink;
+    let index = selection[0].id.replace(/^\D+/g, '');
+    let data = localStorage.getItem("data");
+    if (data != null) {
+        data = JSON.parse(data);
+    } else {
+        data = [];
     }
+    currentSelectedClass.className = data[index].className;
+    currentSelectedClass.meetLink = data[index].meetLink;
+    currentSelectedClass.classroomLink = data[index].classroomLink;
 });
 
 $(document).click(function () {
