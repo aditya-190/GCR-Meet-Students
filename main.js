@@ -1,4 +1,8 @@
-// Global Variable.
+// Global Variables.
+const snackbar = document.getElementById("snackbar");
+const classNameExtract = document.getElementById("className").value;
+const meetLinkExtract = document.getElementById("meetLink").value;
+const classroomLinkExtract = document.getElementById("classroomLink").value;
 const currentSelectedClass = {
     "className": "None",
     "meetLink": "",
@@ -11,35 +15,14 @@ function ValidURL(str) {
     return regex.test(str);
 }
 
-function showToast(message) {
-    const snackbar = document.getElementById("snackbar");
-    snackbar.className = "show";
-    snackbar.innerText = message;
-    setTimeout(function () {
-        snackbar.className = snackbar.className.replace("show", "");
-    }, 3000);
-}
-// Helper Functions - Ends.
-
-
-// Remove from List Button.
-$('.minusButton').click(function () {
-    showToast("Removed Successfully.");
-});
-
-// Add To List Button.
-$('.plusButton').click(function () {
-    const classNameExtract = document.getElementById("className").value;
-    const meetLinkExtract = document.getElementById("meetLink").value;
-    const classroomLinkExtract = document.getElementById("classroomLink").value;
-
+function isInputValid() {
     if (!ValidURL(meetLinkExtract)) {
         document.querySelector("#meetContainer").style.border = "1px solid #FF5C58";
         setTimeout(() => {
             document.querySelector("#meetContainer").style.border = "";
         }, 2000);
         showToast("Enter Valid Meet Link.");
-        return;
+        return false;
     }
 
     if (classNameExtract === "") {
@@ -48,7 +31,7 @@ $('.plusButton').click(function () {
             document.querySelector("#classNameContainer").style.border = "";
         }, 2000);
         showToast("Enter Class Name.");
-        return;
+        return false;
     }
 
     if (!ValidURL(classroomLinkExtract)) {
@@ -57,21 +40,56 @@ $('.plusButton').click(function () {
             document.querySelector("#classRoomContainer").style.border = "";
         }, 2000);
         showToast("Enter Valid ClassRoom Link.");
-        return;
+        return false;
     }
+    return true;
+}
 
-    let singleContent = {
-        "className": classNameExtract,
-        "meetLink": meetLinkExtract,
-        "classroomLink": classroomLinkExtract,
-    }
+function showToast(message) {
+    snackbar.className = "show";
+    snackbar.innerText = message;
+    setTimeout(function () {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
+}
 
-    chrome.storage.local.set({allData: singleContent}, function () {
+function getLocalStorageItems() {
+
+}
+
+function setLocalStorageItems(obj) {
+    chrome.storage.local.set({data: obj}, function () {
         document.getElementById("className").value = "";
         document.getElementById("meetLink").value = "";
         document.getElementById("classroomLink").value = "";
         showToast("Added Successfully.");
     });
+}
+
+function removeLocalStorageItem() {
+    chrome.storage.local.remove(currentSelectedClass.className, function () {
+        showToast("Removed Successfully.");
+    });
+}
+
+// Helper Functions - Ends.
+
+
+// Remove from List Button.
+$('.minusButton').click(function () {
+    removeLocalStorageItem();
+});
+
+// Add To List Button.
+$('.plusButton').click(function () {
+    if (isInputValid()) {
+        let singleContent = {
+            "className": classNameExtract,
+            "meetLink": meetLinkExtract,
+            "classroomLink": classroomLinkExtract,
+        }
+        setLocalStorageItems(singleContent);
+    }
 });
 
 // Google Meet Button.
