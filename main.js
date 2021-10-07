@@ -1,22 +1,15 @@
+// Global Variable
+
 const currentSelectedClass = {
     "className": "None",
     "meetLink": "",
     "classroomLink": "",
 };
 
-// Code Handling DropBox Select Options - Starts.
 
-$('.selectedContainer').click(function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).toggleClass('expanded');
-    $('#' + $(e.target).attr('for')).prop('checked', true);
-});
-$(document).click(function () {
-    $('.selectedContainer').removeClass('expanded');
-});
 
-// Code Handling DropBox Select Options - Ends.
+
+// Helper Functions - Starts.
 
 function ValidURL(str) {
     const regex = /(http|https):\/\/(\w+:?\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%\-\/]))?/;
@@ -32,10 +25,20 @@ function showToast(message) {
     }, 3000);
 }
 
+// Helper Functions - Ends.
+
+
+
+
+
+// Click Listeners - Starts.
+
+// Remove from List Button.
 $('.minusButton').click(function () {
     showToast("Removed Successfully.");
 });
 
+// Add To List Button.
 $('.plusButton').click(function () {
     const classNameExtract = document.getElementById("className").value;
     const meetLinkExtract = document.getElementById("meetLink").value;
@@ -79,6 +82,7 @@ $('.plusButton').click(function () {
     document.getElementById("classroomLink").value = "";
 });
 
+// Google Meet Button.
 $(document.getElementById("googleMeet")).click(function () {
     if (currentSelectedClass.className !== "None") {
         chrome.tabs.create({active: true, url: currentSelectedClass.meetLink});
@@ -87,6 +91,7 @@ $(document.getElementById("googleMeet")).click(function () {
     }
 });
 
+// Google ClassRoom Button.
 $(document.getElementById("googleClassroom")).click(function () {
     if (currentSelectedClass.className !== "None") {
         chrome.tabs.create({active: true, url: currentSelectedClass.classroomLink});
@@ -94,3 +99,21 @@ $(document.getElementById("googleClassroom")).click(function () {
         showToast("Please Select Class.");
     }
 });
+
+// DropDown List Selection Handler.
+$('.selectedContainer').click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).toggleClass('expanded');
+    const selection = $('#' + $(e.target).attr('for'))
+    selection.prop('checked', true);
+
+    currentSelectedClass.className = selection.val();
+    // TODO: Retrieve Data using Key - Class Name.
+});
+
+$(document).click(function () {
+    $('.selectedContainer').removeClass('expanded');
+});
+
+// Click Listeners - Ends.
