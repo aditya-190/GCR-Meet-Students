@@ -4,8 +4,9 @@ body {
 
 .container {
     width: 450px;
-    height: 450px;
+    height: fit-content;
     padding: 16px;
+    min-height: 450px;
     border: 5px solid black;
 }
 
@@ -49,7 +50,7 @@ body {
 .innerContainer {
     position: relative;
     border-radius: 16px;
-    height: 315px;
+    height: fit-content;
     width: 418px;
     padding: 16px;
     background-color: #99a3ba;
