@@ -1,22 +1,35 @@
-// Global Variables.
-const snackbar = document.getElementById("snackbar");
-const classNameExtract = document.getElementById("className").value;
-const meetLinkExtract = document.getElementById("meetLink").value;
-const classroomLinkExtract = document.getElementById("classroomLink").value;
 const currentSelectedClass = {
     "className": "None",
     "meetLink": "",
     "classroomLink": "",
 };
 
-// Helper Functions - Starts.
-function ValidURL(str) {
-    const regex = /(http|https):\/\/(\w+:?\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%\-\/]))?/;
-    return regex.test(str);
+// Automatically Called Function - Starts.
+let arr = document.querySelectorAll(".formInput");
+let data;
+for (let i = 0; i < 3; i++) {
+    data = localStorage.getItem(`input${i}`);
+    if (data) {
+        arr[i].value = data;
+    }
 }
 
-function isInputValid() {
-    if (!ValidURL(meetLinkExtract)) {
+for (let i = 0; i < 3; i++) {
+    arr[i].addEventListener("change", () => {
+        localStorage.setItem(`input${i}`, arr[i].value);
+    })
+}
+updateList();
+// Automatically Called Function - Ends.
+
+// Helper Functions - Starts.
+function isURLValid(url) {
+    const regex = /(http|https):\/\/(\w+:?\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%\-\/]))?/;
+    return regex.test(url);
+}
+
+function isInputValid(classNameExtract, meetLinkExtract, classroomLinkExtract) {
+    if (!isURLValid(meetLinkExtract)) {
         document.querySelector("#meetContainer").style.border = "1px solid #FF5C58";
         setTimeout(() => {
             document.querySelector("#meetContainer").style.border = "";
@@ -34,7 +47,7 @@ function isInputValid() {
         return false;
     }
 
-    if (!ValidURL(classroomLinkExtract)) {
+    if (!isURLValid(classroomLinkExtract)) {
         document.querySelector("#classRoomContainer").style.border = "1px solid #FF5C58";
         setTimeout(() => {
             document.querySelector("#classRoomContainer").style.border = "";
@@ -46,6 +59,7 @@ function isInputValid() {
 }
 
 function showToast(message) {
+    const snackbar = document.getElementById("snackbar");
     snackbar.className = "show";
     snackbar.innerText = message;
     setTimeout(function () {
@@ -53,23 +67,61 @@ function showToast(message) {
     }, 3000);
 }
 
-function getLocalStorageItems() {
+function updateList() {
+    let obj = localStorage.getItem("data");
+    if (obj != null) {
+        obj = JSON.parse(obj);
+    } else {
+        obj = [];
+    }
 
+    const classes = document.getElementById("selectedContainer");
+    let html = '';
+    let singleData;
+    html += `<input type="radio" class="teacherName" name="teacherName" value="None"
+           id="teacherName" checked><label for="teacherName">None</label>`
+
+    obj.forEach(function (element) {
+        singleData = `<input type="radio" class="teacherName" name="teacherName" value="${element.className}" id="${element.className}"><label
+                for="${element.className}">${element.className}</label>`
+        html += singleData;
+    })
+    classes.innerHTML = html;
 }
 
 function setLocalStorageItems(obj) {
-    chrome.storage.local.set({data: obj}, function () {
-        document.getElementById("className").value = "";
-        document.getElementById("meetLink").value = "";
-        document.getElementById("classroomLink").value = "";
-        showToast("Added Successfully.");
-    });
+    let data = JSON.parse(localStorage.getItem("data"));
+    if (data == null) {
+        data = [];
+    }
+    data.push(obj);
+    localStorage.setItem("data", JSON.stringify(data));
+    updateList();
+
+    for (let i = 0; i < 3; i++) {
+        localStorage.removeItem(`input${i}`);
+    }
 }
 
 function removeLocalStorageItem() {
-    chrome.storage.local.remove(currentSelectedClass.className, function () {
+    let index = currentSelectedClass.className;
+
+    if (index !== "None") {
+        let data = localStorage.getItem("data");
+        if (data != null) {
+            data = JSON.parse(data);
+        } else {
+            data = [];
+        }
+
+        data.splice(index, 1);
+        localStorage.setItem("data", JSON.stringify(data));
+        updateList();
         showToast("Removed Successfully.");
-    });
+        currentSelectedClass.className = "None";
+    } else {
+        showToast("Class Not Selected.");
+    }
 }
 
 // Helper Functions - Ends.
@@ -82,19 +134,27 @@ $('.minusButton').click(function () {
 
 // Add To List Button.
 $('.plusButton').click(function () {
-    if (isInputValid()) {
+    const classNameExtract = document.getElementById("className").value;
+    const meetLinkExtract = document.getElementById("meetLink").value;
+    const classroomLinkExtract = document.getElementById("classroomLink").value;
+
+    if (isInputValid(classNameExtract, meetLinkExtract, classroomLinkExtract)) {
         let singleContent = {
             "className": classNameExtract,
             "meetLink": meetLinkExtract,
             "classroomLink": classroomLinkExtract,
         }
         setLocalStorageItems(singleContent);
+        document.getElementById("className").value = "";
+        document.getElementById("meetLink").value = "";
+        document.getElementById("classroomLink").value = "";
+        showToast("Added Successfully.");
     }
 });
 
 // Google Meet Button.
 $(document.getElementById("googleMeet")).click(function () {
-    if (ValidURL(currentSelectedClass.meetLink)) {
+    if (isURLValid(currentSelectedClass.meetLink)) {
         chrome.tabs.create({active: true, url: currentSelectedClass.meetLink});
     } else {
         showToast("Please Select Class.");
@@ -103,7 +163,7 @@ $(document.getElementById("googleMeet")).click(function () {
 
 // Google ClassRoom Button.
 $(document.getElementById("googleClassroom")).click(function () {
-    if (ValidURL(currentSelectedClass.classroomLink)) {
+    if (isURLValid(currentSelectedClass.classroomLink)) {
         chrome.tabs.create({active: true, url: currentSelectedClass.classroomLink});
     } else {
         showToast("Please Select Class.");
@@ -119,7 +179,22 @@ $('.selectedContainer').click(function (e) {
     selection.prop('checked', true);
 
     currentSelectedClass.className = selection.val();
-    // TODO: Retrieve Data using Key - Class Name.
+
+    console.log(currentSelectedClass.className);
+
+    if (currentSelectedClass.className !== "None") {
+        let index = currentSelectedClass.className.key;
+        let data = localStorage.getItem("data");
+        if (data != null) {
+            data = JSON.parse(data);
+        } else {
+            data = [];
+        }
+
+        console.log(index);
+        currentSelectedClass.meetLink = data[index].meetLink;
+        currentSelectedClass.classroomLink = data[index].classroomLink;
+    }
 });
 
 $(document).click(function () {
