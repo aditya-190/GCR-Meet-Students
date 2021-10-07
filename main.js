@@ -1,16 +1,11 @@
-// Global Variable
-
+// Global Variable.
 const currentSelectedClass = {
     "className": "None",
     "meetLink": "",
     "classroomLink": "",
 };
 
-
-
-
 // Helper Functions - Starts.
-
 function ValidURL(str) {
     const regex = /(http|https):\/\/(\w+:?\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%\-\/]))?/;
     return regex.test(str);
@@ -24,14 +19,8 @@ function showToast(message) {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
 }
-
 // Helper Functions - Ends.
 
-
-
-
-
-// Click Listeners - Starts.
 
 // Remove from List Button.
 $('.minusButton').click(function () {
@@ -77,9 +66,12 @@ $('.plusButton').click(function () {
         "classroomLink": classroomLinkExtract,
     }
 
-    document.getElementById("className").value = "";
-    document.getElementById("meetLink").value = "";
-    document.getElementById("classroomLink").value = "";
+    chrome.storage.local.set({allData: singleContent}, function () {
+        document.getElementById("className").value = "";
+        document.getElementById("meetLink").value = "";
+        document.getElementById("classroomLink").value = "";
+        showToast("Added Successfully.");
+    });
 });
 
 // Google Meet Button.
@@ -115,5 +107,3 @@ $('.selectedContainer').click(function (e) {
 $(document).click(function () {
     $('.selectedContainer').removeClass('expanded');
 });
-
-// Click Listeners - Ends.
