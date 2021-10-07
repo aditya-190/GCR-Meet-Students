@@ -61,6 +61,7 @@ body {
     border: 0;
     min-width: 9em;
     margin-top: 12px;
+    margin-right: 1em;
     font-weight: bold;
     border-radius: 6px;
     padding: 12px;
@@ -162,7 +163,7 @@ body {
 /* DropDown Select - Starts */
 
 .selectedContainer {
-    min-width: 18em;
+    min-width: 18.5em;
     position: relative;
     display: inline-block;
     margin-right: 1em;
