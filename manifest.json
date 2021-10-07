@@ -17,7 +17,6 @@
     "192": "images/logo.png"
   },
   "permissions": [
-    "activeTab",
     "tabs",
     "storage"
   ],

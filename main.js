@@ -121,6 +121,8 @@ function removeLocalStorageItem() {
         updateList();
         showToast("Removed Successfully.");
         currentSelectedClass.className = "None";
+        currentSelectedClass.meetLink = "";
+        currentSelectedClass.classroomLink = "";
     } else {
         showToast("Class Not Selected.");
     }
