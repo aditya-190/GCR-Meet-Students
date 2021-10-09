@@ -12,7 +12,7 @@ Chrome Extension Hepls in putting all the links of Google Meet, Google Classroom
   - Saves all your Google Meet and Google Classroom Links at One Place
   - Simple UI, All links, One Place, Fast Access.
 
-#How To Use ??
+#### How To Use ??
 
 - Enter Details (Class Name, Meet link, GCR link)
 - Click 'Plus' icon to add Details.
