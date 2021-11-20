@@ -5,7 +5,7 @@
 </p>
 
 ## 📜 Description:
-Chrome Extension Hepls in putting all the links of Google Meet, Google Classroom one place - Must for Students.
+Chrome Extension Helps in putting all the links of Google Meet, Google Classroom one place - Must for Students.
 
 - Tired of opening Google Classroom Again and again for links ? 
 
